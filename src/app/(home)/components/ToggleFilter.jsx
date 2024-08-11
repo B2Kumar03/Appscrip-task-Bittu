@@ -4,7 +4,7 @@ import { FaCheck, FaChevronDown, FaChevronUp, FaGreaterThan } from 'react-icons/
 import { PiLessThanLight } from "react-icons/pi";
 import { PiGreaterThan } from "react-icons/pi";
 
-const ToggleFilter = ({setFilterIsHidden,total_product,filterIsHidden}) => {
+const ToggleFilter = ({handleFilterToggle,total_product,filterIsHidden,sortPriceHighToLow,sortPriceLowToHigh,filterToPopular}) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -30,8 +30,8 @@ const ToggleFilter = ({setFilterIsHidden,total_product,filterIsHidden}) => {
     <div className='max-w-screen-xl mx-auto h-[88px] flex justify-between items-center border-b border-t hidden md:flex'>
       <div className='flex justify-between items-center cursor-pointer gap-2'>
         <span className='font-bold'>{total_product} items</span>
-        <span>{filterIsHidden?<PiGreaterThan/>:<PiLessThanLight />}</span>
-        <button className='underline text-[#ccc]' onClick={()=>setFilterIsHidden((prev)=>!prev)}>{filterIsHidden?"HIDE":"SHOW"} FILTER</button>
+        <span className='duration-700'>{filterIsHidden?<PiGreaterThan/>:<PiLessThanLight />}</span>
+        <button className='underline text-[#ccc]' onClick={()=>handleFilterToggle()}>{filterIsHidden?"SHOW":"HIDE"} FILTER</button>
       </div>
       <div className='relative' ref={dropdownRef}>
         <div
@@ -52,13 +52,24 @@ const ToggleFilter = ({setFilterIsHidden,total_product,filterIsHidden}) => {
               <li className='px-4 py-2 text-black cursor-pointer hover:bg-gray-100 text-right'>
                 NEWEST FIRST
               </li>
-              <li className='px-4 py-2 text-black cursor-pointer hover:bg-gray-100 text-right'>
+              <li className='px-4 py-2 text-black cursor-pointer hover:bg-gray-100 text-right' 
+              onClick={()=>{
+                filterToPopular();
+                toggleMenu()
+              }}
+              >
                 POPULAR
               </li>
-              <li className='px-4 py-2 text-black cursor-pointer hover:bg-gray-100 text-right'>
+              <li className='px-4 py-2 text-black cursor-pointer hover:bg-gray-100 text-right' onClick={()=>{
+                sortPriceLowToHigh();
+                toggleMenu()
+              }}>
               PRICE: LOW TO HIGH
               </li>
-              <li className='px-4 py-2 text-black cursor-pointer hover:bg-gray-100 text-right'>
+              <li className='px-4 py-2 text-black cursor-pointer hover:bg-gray-100 text-right' onClick={()=>{
+                sortPriceHighToLow();
+                toggleMenu()
+              }}>
                 PRICE: HIGH TO LOW
               </li>
             </ul>

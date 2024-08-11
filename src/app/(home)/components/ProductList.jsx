@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { FaCheck, FaHeart } from "react-icons/fa";
-import { BsFilter } from "react-icons/bs";
+import { BsFilter, BsToggle2On } from "react-icons/bs";
 import { MdSort } from "react-icons/md";
 import FilterSidebar from "./FilterSidebar";
 import Image from "next/image";
@@ -26,18 +26,18 @@ const ProductList = () => {
   const [filterIsHidden, setFilterIsHidden] = useState(false);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [loading, setLoading] = useState(true); // Loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
-        setLoading(false); // Set loading to false once data is fetched
+        setLoading(false);
       })
       .catch((err) => {
         console.error(err);
-        setLoading(false); // Ensure loading is set to false on error
+        setLoading(false);
       });
   }, []);
 
@@ -48,30 +48,45 @@ const ProductList = () => {
     }));
   };
 
-  const handleFilterToggle = () => setFilterIsHidden(!filterIsHidden);
+  const handleFilterToggle = () => setFilterIsHidden((prev) => !prev);
 
   const handleMenuToggle = () => setMenuIsOpen(!menuIsOpen);
 
   function filterMethod(filter) {
-    let filteredProducts = products.filter((product) =>
+    const filteredProducts = products.filter((product) =>
       product.category.includes(filter)
     );
     setProducts(filteredProducts);
+  }
+  function sortPriceHighToLow(){
+    const sortedProducts = [...products].sort((a, b) => b.price - a.price);
+    setProducts(sortedProducts);
+  }
+  function sortPriceLowToHigh(){
+    const sortedProducts = [...products].sort((a, b) => a.price - b.price);
+    setProducts(sortedProducts);
+  }
+  function filterToPopular(){
+    const sortedProducts = [...products].sort((a, b) => b.rating.rate - a.rating.rate);
+    setProducts(sortedProducts);
   }
 
   return (
     <>
       {/* Toggle filter and Recommendation button */}
       <ToggleFilter
-        setFilterIsHidden={setFilterIsHidden}
-        total_product={products.length}
         filterIsHidden={filterIsHidden}
+        total_product={products.length}
+        handleFilterToggle={handleFilterToggle}
+        sortPriceLowToHigh={sortPriceLowToHigh} 
+        sortPriceHighToLow={sortPriceHighToLow}
+        filterToPopular={filterToPopular}
       />
-      <div className="flex lg:max-w-screen-xl w-[100%] mx-auto flex-col md:flex-row">
+      <div className="flex lg:max-w-screen-xl w-full mx-auto flex-col md:flex-row">
         {/* Filter Section */}
         {!filterIsHidden && (
           <div className="md:w-1/4 h-[846px] p-4 hidden md:block">
-            <FilterSidebar filterMethod={filterMethod} />
+            <FilterSidebar filterMethod={filterMethod}  />
           </div>
         )}
 
@@ -79,7 +94,7 @@ const ProductList = () => {
         <div
           className={`w-full ${
             filterIsHidden ? "md:w-full" : "md:w-[75%]"
-          } p-4 auto`}
+          } p-4`}
         >
           {/* Filter and Sort for Mobile */}
           <div className="flex justify-between items-center md:hidden mb-4">
@@ -96,21 +111,25 @@ const ProductList = () => {
               <MdSort /> Recommended
             </button>
             {isOpen && (
-              <div className="absolute right-0 mt-10 w-60 bg-white border rounded shadow-lg">
-                <ul className="text-left">
+              <div className="absolute right-0 mt-60 w-60 bg-white border rounded shadow-lg" >
+                <ul className="text-left" >
                   <li className="px-4 py-2 text-black cursor-pointer hover:bg-gray-100 flex items-center gap-2">
                     <FaCheck /> RECOMMENDED
                   </li>
-                  <li className="px-4 py-2 text-black cursor-pointer hover:bg-gray-100 text-right">
+                  <li className="px-4 py-2 text-black cursor-pointer hover:bg-gray-100" onClick={()=>alert("Not available")} >
                     NEWEST FIRST
                   </li>
-                  <li className="px-4 py-2 text-black cursor-pointer hover:bg-gray-100 text-right">
+                  <li className="px-4 py-2 text-black cursor-pointer hover:bg-gray-100" onClick={()=>{
+                    filterToPopular()
+                    setIsOpen((prev)=>!prev)
+
+                  }}>
                     POPULAR
                   </li>
-                  <li className="px-4 py-2 text-black cursor-pointer hover:bg-gray-100 text-right">
+                  <li className="px-4 py-2 text-black cursor-pointer hover:bg-gray-100" onClick={sortPriceLowToHigh}>
                     PRICE: LOW TO HIGH
                   </li>
-                  <li className="px-4 py-2 text-black cursor-pointer hover:bg-gray-100 text-right">
+                  <li className="px-4 py-2 text-black cursor-pointer hover:bg-gray-100" onClick={sortPriceHighToLow}>
                     PRICE: HIGH TO LOW
                   </li>
                 </ul>
@@ -120,16 +139,16 @@ const ProductList = () => {
 
           {/* Product or Skeleton Loader */}
           <div
-            className={`grid grid-cols-2 md:grid-cols-${
-              filterIsHidden ? "4" : "3"
+            className={`grid grid-cols-2 ${
+              filterIsHidden ? "md:grid-cols-4" : "md:grid-cols-3"
             } gap-4`}
           >
             {loading
-              ? Array(10)
+              ? Array(6)
                   .fill()
                   .map((_, index) => <ProductSkeleton key={index} />)
               : products.map((product) => (
-                  <div key={product.id} className="bg-white p-4 shadow rounded">
+                  <div key={product.id} className="bg-white p-4 shadow rounded duration-700">
                     <Image
                       src={product.image}
                       alt={product.title}
@@ -137,7 +156,9 @@ const ProductList = () => {
                       height={100}
                       width={100}
                     />
-                    <h3 className="text-sm font-semibold mb-2">{product.title}</h3>
+                    <h3 className="text-sm font-semibold mb-2">
+                      {product.title}
+                    </h3>
                     <p className="text-sm text-gray-500">${product.price}</p>
                     <div className="flex justify-between items-center mt-2">
                       <button

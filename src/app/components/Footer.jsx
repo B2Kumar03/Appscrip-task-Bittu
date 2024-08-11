@@ -7,24 +7,24 @@ import { BsCurrencyDollar } from 'react-icons/bs';
 
 const Footer = () => {
   return (
-    <footer className="bg-black max-w-[100%] text-white py-8">
-      <div className="container  mx-auto px-4">
+    <footer className="bg-black max-w-full text-white py-8">
+      <div className="container md:mx-auto px-4">
         {/* Top Section */}
         <div className="flex flex-col md:flex-row justify-between items-center border-b border-gray-700 pb-6">
           <div className="w-full md:w-auto text-center md:text-left mb-6 md:mb-0">
             <h3 className="text-lg font-medium mb-2">BE THE FIRST TO KNOW</h3>
             <p className="text-sm">Sign up for updates from mettā muse.</p>
-            <div className="mt-4 grid md:grid-cols-2 gap-4 ">
-             <div>
-             <input
-                type="email"
-                placeholder="Enter your e-mail..."
-                className="px-4 py-2  bg-white text-white focus:outline-none"
-              />
-             </div>
-             <div>
-             <button className="px-4 py-2 text-[#f0efef] border  border-red-100  ">SUBSCRIBE</button>
-             </div>
+            <div className="mt-4 grid md:grid-cols-2 gap-4">
+              <div>
+                <input
+                  type="email"
+                  placeholder="Enter your e-mail..."
+                  className="px-4 py-2 bg-white text-black focus:outline-none w-full"
+                />
+              </div>
+              <div>
+                <button className="px-4 py-2 text-[#f0efef] border border-red-100 w-full">SUBSCRIBE</button>
+              </div>
             </div>
           </div>
           <div className="w-full md:w-auto text-center md:text-right">
@@ -79,7 +79,7 @@ const Footer = () => {
             <div className="mt-6">
               <h3 className="text-lg font-medium mb-2">mettā muse ACCEPTS</h3>
               <div className="flex justify-center md:justify-end space-x-4">
-                <Image src="https://www.svgrepo.com/show/303357/google-pay-primary-logo-logo.svg" alt="GPay" width={40} height={40}  />
+                <Image src="https://www.svgrepo.com/show/303357/google-pay-primary-logo-logo.svg" alt="GPay" width={40} height={40} />
                 <Image src="https://www.svgrepo.com/show/328127/visa.svg" alt="Visa" width={40} height={40} />
                 <Image src="https://www.mastercard.com/content/dam/public/brandcenter/assets/images/logos/mclogo-for-footer.svg" alt="Mastercard" width={40} height={40} />
                 <Image src="https://www.svgrepo.com/show/14823/amex.svg" alt="Amex" width={40} height={40} />

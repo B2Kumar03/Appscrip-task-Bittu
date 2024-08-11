@@ -60,7 +60,7 @@ const Navbar = () => {
           </div>
 
           {/* Bottom Nav Links for Desktop */}
-          <div className="hidden md:flex justify-center space-x-8 border-t border-gray-200 py-2">
+          <div className="hidden md:flex justify-center space-x-8  border-gray-200 py-2">
             <a href="#" className="text-sm font-semibold hover:text-gray-700">SHOP</a>
             <a href="#" className="text-sm font-semibold hover:text-gray-700">SKILLS</a>
             <a href="#" className="text-sm font-semibold hover:text-gray-700">STORIES</a>
