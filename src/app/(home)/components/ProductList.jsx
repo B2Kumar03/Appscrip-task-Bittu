@@ -110,6 +110,7 @@ const ProductList = () => {
             >
               FILTER
             </button>
+          
             <button
               className="text-[20px] text-[#E5E5E5]"
             >
@@ -183,16 +184,16 @@ const ProductList = () => {
                     />
 
                     <div className="flex justify-between">
-                    <p className="text-sm text-black font-bold text-[24px]">
+                    <p className=" text-black font-bold text-[18px]">
                       {product.title.length > 17
                         ? `${product.title.substring(0, 17)}...`
                         : product.title}
                     </p>
 
                     <button
-                        className={`text-[24px] ${
+                        className={`text-[24px] md:hidden ${
                           favorites[product.id] ? "text-red-500" : ""
-                        }md:hidden`}
+                        }`}
                         onClick={() => toggleFavorite(product.id)}
                       >
                         {favorites[product.id] ? <GoHeartFill /> : <GoHeart />}
@@ -200,13 +201,13 @@ const ProductList = () => {
                     </div>
                  
                     <div className="flex justify-between  mt-2">
-                      <button className="text-sm  text-[10px] text-[#888792]">
+                      <button className="text-sm  text-[8px] text-[#888792]">
                         <u>Sign in</u> or Create an account to see pricing
                       </button>
                       <button
-                        className={`text-[24px] ${
+                        className={`text-[24px] md:block hidden ${
                           favorites[product.id] ? "text-red-500" : ""
-                        }md:block hidden`}
+                        }`}
                         onClick={() => toggleFavorite(product.id)}
                       >
                         {favorites[product.id] ? <GoHeartFill /> : <GoHeart />}
