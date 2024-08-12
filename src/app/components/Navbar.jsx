@@ -3,7 +3,7 @@ import { MenuIcon, SearchIcon, HeartIcon, ShoppingBagIcon, UserIcon } from '@her
 
 const Navbar = () => {
   return (
-    <div className="w-full">
+    <div className="fixed top-0 w-full z-50"> {/* Added fixed positioning */}
       {/* Top bar */}
       <div className="bg-black text-white text-center py-1">
         <div className="flex justify-center md:justify-between items-center max-w-screen-xl mx-auto px-4">
@@ -40,7 +40,7 @@ const Navbar = () => {
 
             {/* Center Logo for Desktop */}
             <div className="hidden md:flex justify-center flex-grow">
-              <span className="text-xl font-bold">LOGO</span>
+              <span className="text-xl font-extrabold">LOGO</span> {/* Thicker font weight */}
             </div>
 
             {/* Right side icons and language switch */}
@@ -48,7 +48,7 @@ const Navbar = () => {
               <SearchIcon className="h-6 w-6" />
               <HeartIcon className="h-6 w-6" />
               <ShoppingBagIcon className="h-6 w-6" />
-              <UserIcon className="h-6 w-6 hidden md:flex " />
+              <UserIcon className="h-6 w-6 hidden md:flex" />
               {/* This div is hidden on small devices */}
               <div className="hidden md:flex items-center space-x-1">
                 <span>ENG</span>
@@ -60,12 +60,37 @@ const Navbar = () => {
           </div>
 
           {/* Bottom Nav Links for Desktop */}
-          <div className="hidden md:flex justify-center space-x-8  border-gray-200 py-2">
-            <a href="#" className="text-sm font-semibold hover:text-gray-700">SHOP</a>
-            <a href="#" className="text-sm font-semibold hover:text-gray-700">SKILLS</a>
-            <a href="#" className="text-sm font-semibold hover:text-gray-700">STORIES</a>
-            <a href="#" className="text-sm font-semibold hover:text-gray-700">ABOUT</a>
-            <a href="#" className="text-sm font-semibold hover:text-gray-700">CONTACT US</a>
+          <div className="hidden md:flex justify-center space-x-8 border-gray-200 py-2">
+            <a
+              href="#"
+              className="text-sm font-extrabold hover:text-gray-700 transition duration-200 ease-in-out"
+            >
+              SHOP
+            </a>
+            <a
+              href="#"
+              className="text-sm font-extrabold hover:text-gray-700 transition duration-200 ease-in-out"
+            >
+              SKILLS
+            </a>
+            <a
+              href="#"
+              className="text-sm font-extrabold hover:text-gray-700 transition duration-200 ease-in-out"
+            >
+              STORIES
+            </a>
+            <a
+              href="#"
+              className="text-sm font-extrabold hover:text-gray-700 transition duration-200 ease-in-out"
+            >
+              ABOUT
+            </a>
+            <a
+              href="#"
+              className="text-sm font-extrabold hover:text-gray-700 transition duration-200 ease-in-out"
+            >
+              CONTACT US
+            </a>
           </div>
         </div>
       </div>

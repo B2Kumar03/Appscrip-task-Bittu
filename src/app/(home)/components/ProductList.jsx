@@ -7,6 +7,9 @@ import FilterSidebar from "./FilterSidebar";
 import Image from "next/image";
 import ToggleFilter from "./ToggleFilter";
 
+import { GoHeart } from "react-icons/go";
+import { GoHeartFill } from "react-icons/go";
+
 // Skeleton Loader Component
 const ProductSkeleton = () => (
   <div className="bg-gray-200 p-4 shadow rounded animate-pulse">
@@ -58,16 +61,18 @@ const ProductList = () => {
     );
     setProducts(filteredProducts);
   }
-  function sortPriceHighToLow(){
+  function sortPriceHighToLow() {
     const sortedProducts = [...products].sort((a, b) => b.price - a.price);
     setProducts(sortedProducts);
   }
-  function sortPriceLowToHigh(){
+  function sortPriceLowToHigh() {
     const sortedProducts = [...products].sort((a, b) => a.price - b.price);
     setProducts(sortedProducts);
   }
-  function filterToPopular(){
-    const sortedProducts = [...products].sort((a, b) => b.rating.rate - a.rating.rate);
+  function filterToPopular() {
+    const sortedProducts = [...products].sort(
+      (a, b) => b.rating.rate - a.rating.rate
+    );
     setProducts(sortedProducts);
   }
 
@@ -78,7 +83,7 @@ const ProductList = () => {
         filterIsHidden={filterIsHidden}
         total_product={products.length}
         handleFilterToggle={handleFilterToggle}
-        sortPriceLowToHigh={sortPriceLowToHigh} 
+        sortPriceLowToHigh={sortPriceLowToHigh}
         sortPriceHighToLow={sortPriceHighToLow}
         filterToPopular={filterToPopular}
       />
@@ -86,7 +91,7 @@ const ProductList = () => {
         {/* Filter Section */}
         {!filterIsHidden && (
           <div className="md:w-1/4 h-[846px] p-4 hidden md:block">
-            <FilterSidebar filterMethod={filterMethod}  />
+            <FilterSidebar filterMethod={filterMethod} />
           </div>
         )}
 
@@ -97,39 +102,56 @@ const ProductList = () => {
           } p-4`}
         >
           {/* Filter and Sort for Mobile */}
-          <div className="flex justify-between items-center md:hidden mb-4">
+          <div className="flex justify-around items-center md:hidden mb-4 bg-white border-t border-b">
             <button
-              className="flex items-center gap-2 bg-gray-200 p-2 rounded"
+              className="flex items-center gap-2  p-2 text-[#252020] font-extrabold text-[14px]"
               onClick={handleFilterToggle}
+              
             >
-              <BsFilter /> Filter
+              FILTER
             </button>
             <button
-              className="flex items-center gap-2 bg-gray-200 p-2 rounded"
+              className="text-[20px] text-[#E5E5E5]"
+            >
+              |
+            </button>
+            <button
+              className="flex items-center gap-2 font-extrabold p-2 text-[#252020] text-[14px]"
               onClick={() => setIsOpen((prev) => !prev)}
             >
-              <MdSort /> Recommended
+              RECOMMENDED
             </button>
             {isOpen && (
-              <div className="absolute right-0 mt-60 w-60 bg-white border rounded shadow-lg" >
-                <ul className="text-left" >
-                  <li className="px-4 py-2 text-black cursor-pointer hover:bg-gray-100 flex items-center gap-2">
+              <div className="absolute right-0 mt-60 w-60 bg-white border rounded shadow-lg">
+                <ul className="text-left">
+                  <li className="px-4 py-2 text-black  cursor-pointer hover:bg-gray-100 flex items-center gap-2">
                     <FaCheck /> RECOMMENDED
                   </li>
-                  <li className="px-4 py-2 text-black cursor-pointer hover:bg-gray-100" onClick={()=>alert("Not available")} >
+                  <li
+                    className="px-4 py-2 text-black cursor-pointer hover:bg-gray-100"
+                    onClick={() => alert("Not available")}
+                  >
                     NEWEST FIRST
                   </li>
-                  <li className="px-4 py-2 text-black cursor-pointer hover:bg-gray-100" onClick={()=>{
-                    filterToPopular()
-                    setIsOpen((prev)=>!prev)
-
-                  }}>
+                  <li
+                    className="px-4 py-2 text-black cursor-pointer hover:bg-gray-100"
+                    onClick={() => {
+                      filterToPopular();
+                      setIsOpen((prev) => !prev);
+                    }}
+                  >
                     POPULAR
                   </li>
-                  <li className="px-4 py-2 text-black cursor-pointer hover:bg-gray-100" onClick={sortPriceLowToHigh}>
+                  <li
+                    className="px-4 py-2 text-black cursor-pointer hover:bg-gray-100"
+                    onClick={sortPriceLowToHigh}
+                  >
                     PRICE: LOW TO HIGH
                   </li>
-                  <li className="px-4 py-2 text-black cursor-pointer hover:bg-gray-100" onClick={sortPriceHighToLow}>
+                  <li
+                    className="px-4 py-2 text-black cursor-pointer hover:bg-gray-100"
+                    onClick={sortPriceHighToLow}
+                  >
                     PRICE: HIGH TO LOW
                   </li>
                 </ul>
@@ -148,29 +170,46 @@ const ProductList = () => {
                   .fill()
                   .map((_, index) => <ProductSkeleton key={index} />)
               : products.map((product) => (
-                  <div key={product.id} className="bg-white p-4 shadow rounded duration-700">
+                  <div
+                    key={product.id}
+                    className="bg-white  p-4 shadow rounded duration-700 "
+                  >
                     <Image
                       src={product.image}
                       alt={product.title}
-                      className="h-32 mx-auto mb-2"
-                      height={100}
-                      width={100}
+                      className="h-32 mx-auto mb-4 md:h-[399px] md:w-[300px]"
+                      height={399}
+                      width={300}
                     />
-                    <h3 className="text-sm font-semibold mb-2">
-                      {product.title}
-                    </h3>
-                    <p className="text-sm text-gray-500">${product.price}</p>
-                    <div className="flex justify-between items-center mt-2">
-                      <button
-                        className={`text-gray-500 ${
+
+                    <div className="flex justify-between">
+                    <p className="text-sm text-black font-bold text-[24px]">
+                      {product.title.length > 17
+                        ? `${product.title.substring(0, 17)}...`
+                        : product.title}
+                    </p>
+
+                    <button
+                        className={`text-[24px] ${
                           favorites[product.id] ? "text-red-500" : ""
-                        }`}
+                        }md:hidden`}
                         onClick={() => toggleFavorite(product.id)}
                       >
-                        <FaHeart />
+                        {favorites[product.id] ? <GoHeartFill /> : <GoHeart />}
                       </button>
-                      <button className="text-sm font-semibold text-blue-600">
-                        Sign in to see pricing
+                    </div>
+                 
+                    <div className="flex justify-between  mt-2">
+                      <button className="text-sm  text-[10px] text-[#888792]">
+                        <u>Sign in</u> or Create an account to see pricing
+                      </button>
+                      <button
+                        className={`text-[24px] ${
+                          favorites[product.id] ? "text-red-500" : ""
+                        }md:block hidden`}
+                        onClick={() => toggleFavorite(product.id)}
+                      >
+                        {favorites[product.id] ? <GoHeartFill /> : <GoHeart />}
                       </button>
                     </div>
                   </div>
