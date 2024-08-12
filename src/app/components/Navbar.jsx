@@ -63,33 +63,38 @@ const Navbar = () => {
           <div className="hidden md:flex justify-center space-x-8 border-gray-200 py-2">
             <a
               href="#"
-              className="text-sm font-extrabold hover:text-gray-700 transition duration-200 ease-in-out"
+              className="text-sm font-extrabold hover:text-gray-700 transition duration-200 ease-in-out group"
             >
               SHOP
+              <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-black"></span>
             </a>
             <a
               href="#"
-              className="text-sm font-extrabold hover:text-gray-700 transition duration-200 ease-in-out"
+              className="text-sm font-extrabold hover:text-gray-700 transition duration-200 ease-in-out group"
             >
               SKILLS
+              <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-black"></span>
             </a>
             <a
               href="#"
-              className="text-sm font-extrabold hover:text-gray-700 transition duration-200 ease-in-out"
+              className="text-sm font-extrabold hover:text-gray-700 transition duration-200 ease-in-out group"
             >
               STORIES
+              <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-black"></span>
             </a>
             <a
               href="#"
-              className="text-sm font-extrabold hover:text-gray-700 transition duration-200 ease-in-out"
+              className="text-sm font-extrabold hover:text-gray-700 transition duration-200 ease-in-out group"
             >
               ABOUT
+              <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-black"></span>
             </a>
             <a
               href="#"
-              className="text-sm font-extrabold hover:text-gray-700 transition duration-200 ease-in-out"
+              className="text-sm font-extrabold hover:text-gray-700 transition duration-200 ease-in-out group"
             >
               CONTACT US
+              <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-black"></span>
             </a>
           </div>
         </div>

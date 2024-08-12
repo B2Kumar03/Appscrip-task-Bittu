@@ -201,7 +201,7 @@ const ProductList = () => {
                     </div>
                  
                     <div className="flex justify-between  mt-2">
-                      <button className="text-sm  text-[5px] text-[#888792]">
+                      <button className=" text-[10px] text-[#888792]">
                         <u>Sign in</u> or Create an account to see pricing
                       </button>
                       <button
