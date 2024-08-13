@@ -3,22 +3,22 @@ import React, { useState, useEffect } from "react";
 import { FaCheck, FaHeart } from "react-icons/fa";
 import { BsFilter, BsToggle2On } from "react-icons/bs";
 import { MdSort } from "react-icons/md";
-import FilterSidebar from "./FilterSidebar";
+import FilterSidebar from "../FilterSliderbar/FilterSidebar";
 import Image from "next/image";
-import ToggleFilter from "./ToggleFilter";
+import ToggleFilter from "../ToggleFilter/ToggleFilter";
+import { GoHeart, GoHeartFill } from "react-icons/go";
+import './ProductList.css';
 
-import { GoHeart } from "react-icons/go";
-import { GoHeartFill } from "react-icons/go";
 
 // Skeleton Loader Component
 const ProductSkeleton = () => (
-  <div className="bg-gray-200 p-4 shadow rounded animate-pulse">
-    <div className="h-32 bg-gray-300 mb-2"></div>
-    <div className="h-4 bg-gray-300 mb-2"></div>
-    <div className="h-4 bg-gray-300 mb-2"></div>
-    <div className="flex justify-between items-center mt-2">
-      <div className="h-5 bg-gray-300 w-8"></div>
-      <div className="h-5 bg-gray-300 w-24"></div>
+  <div className="product-skeleton">
+    <div className="skeleton-image"></div>
+    <div className="skeleton-text"></div>
+    <div className="skeleton-text"></div>
+    <div className="skeleton-footer">
+      <div className="skeleton-price"></div>
+      <div className="skeleton-button"></div>
     </div>
   </div>
 );
@@ -78,7 +78,6 @@ const ProductList = () => {
 
   return (
     <>
-      {/* Toggle filter and Recommendation button */}
       <ToggleFilter
         filterIsHidden={filterIsHidden}
         total_product={products.length}
@@ -87,55 +86,42 @@ const ProductList = () => {
         sortPriceHighToLow={sortPriceHighToLow}
         filterToPopular={filterToPopular}
       />
-      <div className="flex lg:max-w-screen-xl w-full mx-auto flex-col md:flex-row">
-        {/* Filter Section */}
+      <div className="product-list-container ">
         {!filterIsHidden && (
-          <div className="md:w-1/4 h-[846px] p-4 hidden md:block">
+          <div className="filter-sidebar">
             <FilterSidebar filterMethod={filterMethod} />
           </div>
         )}
 
-        {/* Product List Section */}
-        <div
-          className={`w-full ${
-            filterIsHidden ? "md:w-full" : "md:w-[75%]"
-          } p-4`}
-        >
-          {/* Filter and Sort for Mobile */}
-          <div className="flex justify-around items-center md:hidden mb-4 bg-white border-t border-b">
+        <div className={`product-list ${filterIsHidden ? "full-width" : "partial-width"} `}>
+          <div className="mobile-filter-menu">
             <button
-              className="flex items-center gap-2  p-2 text-[#252020] font-extrabold text-[14px]"
-              onClick={handleFilterToggle}
+              className="filter-button"
               
             >
               FILTER
             </button>
-          
+            <button className="divider">|</button>
             <button
-              className="text-[20px] text-[#E5E5E5]"
-            >
-              |
-            </button>
-            <button
-              className="flex items-center gap-2 font-extrabold p-2 text-[#252020] text-[14px]"
+              className="recommended-button"
               onClick={() => setIsOpen((prev) => !prev)}
             >
               RECOMMENDED
             </button>
             {isOpen && (
-              <div className="absolute right-0 mt-60 w-60 bg-white border rounded shadow-lg">
-                <ul className="text-left">
-                  <li className="px-4 py-2 text-black  cursor-pointer hover:bg-gray-100 flex items-center gap-2">
+              <div className="recommendation-menu">
+                <ul>
+                  <li className="menu-item active">
                     <FaCheck /> RECOMMENDED
                   </li>
                   <li
-                    className="px-4 py-2 text-black cursor-pointer hover:bg-gray-100"
+                    className="menu-item"
                     onClick={() => alert("Not available")}
                   >
                     NEWEST FIRST
                   </li>
                   <li
-                    className="px-4 py-2 text-black cursor-pointer hover:bg-gray-100"
+                    className="menu-item"
                     onClick={() => {
                       filterToPopular();
                       setIsOpen((prev) => !prev);
@@ -144,13 +130,13 @@ const ProductList = () => {
                     POPULAR
                   </li>
                   <li
-                    className="px-4 py-2 text-black cursor-pointer hover:bg-gray-100"
+                    className="menu-item"
                     onClick={sortPriceLowToHigh}
                   >
                     PRICE: LOW TO HIGH
                   </li>
                   <li
-                    className="px-4 py-2 text-black cursor-pointer hover:bg-gray-100"
+                    className="menu-item"
                     onClick={sortPriceHighToLow}
                   >
                     PRICE: HIGH TO LOW
@@ -160,54 +146,39 @@ const ProductList = () => {
             )}
           </div>
 
-          {/* Product or Skeleton Loader */}
-          <div
-            className={`grid grid-cols-2 ${
-              filterIsHidden ? "md:grid-cols-4" : "md:grid-cols-3"
-            } gap-4`}
-          >
+          <div className={`product-grid ${filterIsHidden ? "grid-cols-4" : "grid-cols-3"}`}>
             {loading
               ? Array(6)
                   .fill()
                   .map((_, index) => <ProductSkeleton key={index} />)
               : products.map((product) => (
-                  <div
-                    key={product.id}
-                    className="bg-white  p-4 shadow rounded duration-700 "
-                  >
+                  <div key={product.id} className="product-card">
                     <Image
                       src={product.image}
                       alt={product.title}
-                      className="h-32 mx-auto mb-4 md:h-[399px] md:w-[300px]"
+                      className="product-image"
                       height={399}
                       width={300}
                     />
-
-                    <div className="flex justify-between">
-                    <p className=" text-black font-bold text-[18px]">
-                      {product.title.length > 17
-                        ? `${product.title.substring(0, 17)}...`
-                        : product.title}
-                    </p>
-
-                    <button
-                        className={`text-[24px] md:hidden ${
-                          favorites[product.id] ? "text-red-500" : ""
-                        }`}
+                    <div className="product-header">
+                      <p className="product-title">
+                        {product.title.length > 17
+                          ? `${product.title.substring(0, 17)}...`
+                          : product.title}
+                      </p>
+                      <button
+                        className={`favorite-button-mobile ${favorites[product.id] ? "favorite" : ""}`}
                         onClick={() => toggleFavorite(product.id)}
                       >
                         {favorites[product.id] ? <GoHeartFill /> : <GoHeart />}
                       </button>
                     </div>
-                 
-                    <div className="flex justify-between  mt-2">
-                      <button className=" text-[10px] text-[#888792]">
+                    <div className="product-footer">
+                      <button className="signin-message">
                         <u>Sign in</u> or Create an account to see pricing
                       </button>
                       <button
-                        className={`text-[24px] md:block hidden ${
-                          favorites[product.id] ? "text-red-500" : ""
-                        }`}
+                        className={`favorite-button-desktop ${favorites[product.id] ? "favorite" : ""}`}
                         onClick={() => toggleFavorite(product.id)}
                       >
                         {favorites[product.id] ? <GoHeartFill /> : <GoHeart />}

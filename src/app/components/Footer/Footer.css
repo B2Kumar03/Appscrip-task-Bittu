@@ -1,0 +1,135 @@
+.footer {
+    background-color: black;
+    color: white;
+    padding: 2rem 0;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .top-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #4a4a4a;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .subscribe-section, .contact-section {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .heading {
+    font-size: 1.125rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  
+  .text {
+    font-size: 0.875rem;
+  }
+  
+  .subscribe-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .email-input {
+    padding: 0.5rem 1rem;
+    background-color: white;
+    color: black;
+    border: none;
+    outline: none;
+    width: 100%;
+  }
+  
+  .subscribe-button {
+    padding: 0.5rem 1rem;
+    color: #f0efef;
+    border: 1px solid #ffdddd;
+    background-color: transparent;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .contact-section .icon, .currency .icon {
+    margin-right: 0.5rem;
+  }
+  
+  .currency {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+  }
+  
+  .currency-note {
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+  }
+  
+  .bottom-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .links-section {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .links-section .company-links, .links-section .quick-links {
+    margin-bottom: 1.5rem;
+  }
+  
+  .link-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .link-list li {
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+  }
+  
+  .follow-section {
+    text-align: center;
+  }
+  
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .payment-section {
+    margin-top: 1.5rem;
+  }
+  
+  .payment-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    font-size: 0.75rem;
+    border-top: 1px solid #4a4a4a;
+    padding-top: 1rem;
+    margin-top: 1.5rem;
+  }
+  

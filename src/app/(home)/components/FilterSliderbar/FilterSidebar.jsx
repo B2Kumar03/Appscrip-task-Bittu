@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import './FilterSidebar.css'; // Import the CSS file
 
 const FilterSidebar = ({ filterMethod }) => {
   const [expandedSections, setExpandedSections] = useState({
@@ -35,20 +36,18 @@ const FilterSidebar = ({ filterMethod }) => {
   };
 
   return (
-    <div className="space-y-4">
-      {/* Customizable */}
-      <div>
-        <label className="flex items-center">
-          <input type="checkbox" className="mr-2" />
-          <span className="font-bold">CUSTOMIZABLE</span>
+    <div className="filter-sidebar">
+      <div className="filter-item">
+        <label className="filter-label">
+          <input type="checkbox" className="filter-checkbox" />
+          <span className="filter-title">CUSTOMIZABLE</span>
         </label>
       </div>
 
-      {/* Ideal For */}
-      <hr />
-      <div>
+      <hr className="filter-divider" />
+      <div className="filter-item">
         <div
-          className="flex justify-between items-center cursor-pointer font-bold"
+          className="filter-header"
           onClick={() => toggleSection("idealFor")}
         >
           <span>IDEAL FOR</span>
@@ -56,9 +55,9 @@ const FilterSidebar = ({ filterMethod }) => {
         </div>
         <p>All</p>
         {expandedSections.idealFor && (
-          <div className="ml-4 mt-2 space-y-2">
+          <div className="filter-options">
             <p
-              className="text-[#ccc] underline cursor-pointer"
+              className="filter-unselect"
               onClick={() => {
                 setSelectedOptions([]);
                 filterMethod([]);
@@ -66,28 +65,28 @@ const FilterSidebar = ({ filterMethod }) => {
             >
               Unselect all
             </p>
-            <label className="flex items-center">
+            <label className="filter-label">
               <input
                 type="checkbox"
-                className="mr-2"
+                className="filter-checkbox"
                 checked={selectedOptions.includes("men")}
                 onChange={() => handleCheckboxChange("men")}
               />
               <span>Men</span>
             </label>
-            <label className="flex items-center">
+            <label className="filter-label">
               <input
                 type="checkbox"
-                className="mr-2"
+                className="filter-checkbox"
                 checked={selectedOptions.includes("women")}
                 onChange={() => handleCheckboxChange("women")}
               />
               <span>Women</span>
             </label>
-            <label className="flex items-center">
+            <label className="filter-label">
               <input
                 type="checkbox"
-                className="mr-2"
+                className="filter-checkbox"
                 checked={selectedOptions.includes("kids")}
                 onChange={() => handleCheckboxChange("kids")}
               />
@@ -97,98 +96,80 @@ const FilterSidebar = ({ filterMethod }) => {
         )}
       </div>
 
-      {/* Occasion */}
-      <hr />
-      <div>
+      <hr  />
+      <div className="filter-item">
         <div
-          className="flex justify-between items-center cursor-pointer font-bold"
+          className="filter-header"
           onClick={() => toggleSection("occasion")}
         >
           <span>OCCASION</span>
           {expandedSections.occasion ? <FaChevronUp /> : <FaChevronDown />}
         </div>
-        {expandedSections.occasion && <div className="ml-4 mt-2"></div>}
+        {expandedSections.occasion && <div className="filter-options"></div>}
       </div>
       <p>All</p>
-      <hr />
-      {/* Work */}
-      <div>
-        <div
-          className="flex justify-between items-center cursor-pointer font-bold"
-          onClick={() => toggleSection("work")}
-        >
+      <hr className="filter-divider" />
+      <div className="filter-item">
+        <div className="filter-header" onClick={() => toggleSection("work")}>
           <span>WORK</span>
           {expandedSections.work ? <FaChevronUp /> : <FaChevronDown />}
         </div>
-        {expandedSections.work && <div className="ml-4 mt-2"></div>}
+        {expandedSections.work && <div className="filter-options"></div>}
       </div>
       <p>All</p>
-      <hr />
-      {/* Fabric */}
-      <div>
-        <div
-          className="flex justify-between items-center cursor-pointer font-bold"
-          onClick={() => toggleSection("fabric")}
-        >
+      <hr className="filter-divider" />
+      <div className="filter-item">
+        <div className="filter-header" onClick={() => toggleSection("fabric")}>
           <span>FABRIC</span>
           {expandedSections.fabric ? <FaChevronUp /> : <FaChevronDown />}
         </div>
-        {expandedSections.fabric && <div className="ml-4 mt-2"></div>}
+        {expandedSections.fabric && <div className="filter-options"></div>}
       </div>
       <p>All</p>
-      <hr />
-      {/* Segment */}
-      <div>
-        <div
-          className="flex justify-between items-center cursor-pointer font-bold"
-          onClick={() => toggleSection("segment")}
-        >
+      <hr className="filter-divider" />
+      <div className="filter-item">
+        <div className="filter-header" onClick={() => toggleSection("segment")}>
           <span>SEGMENT</span>
           {expandedSections.segment ? <FaChevronUp /> : <FaChevronDown />}
         </div>
-        {expandedSections.segment && <div className="ml-4 mt-2"></div>}
+        {expandedSections.segment && <div className="filter-options"></div>}
       </div>
       <p>All</p>
-      <hr />
-      {/* Suitable For */}
-      <div>
+      <hr className="filter-divider" />
+      <div className="filter-item">
         <div
-          className="flex justify-between items-center cursor-pointer font-bold"
+          className="filter-header"
           onClick={() => toggleSection("suitableFor")}
         >
           <span>SUITABLE FOR</span>
           {expandedSections.suitableFor ? <FaChevronUp /> : <FaChevronDown />}
         </div>
-        {expandedSections.suitableFor && <div className="ml-4 mt-2"></div>}
+        {expandedSections.suitableFor && <div className="filter-options"></div>}
       </div>
+     
       <p>All</p>
-      <hr />
-      {/* Raw Materials */}
-      <div>
+      <hr className="filter-divider" />
+      <div className="filter-item">
         <div
-          className="flex justify-between items-center cursor-pointer font-bold"
+          className="filter-header"
           onClick={() => toggleSection("rawMaterials")}
         >
           <span>RAW MATERIALS</span>
           {expandedSections.rawMaterials ? <FaChevronUp /> : <FaChevronDown />}
         </div>
-        {expandedSections.rawMaterials && <div className="ml-4 mt-2"></div>}
+        {expandedSections.rawMaterials && <div className="filter-options"></div>}
       </div>
       <p>All</p>
-      <hr />
-      {/* Pattern */}
-      <div>
-        <div
-          className="flex justify-between items-center cursor-pointer font-bold"
-          onClick={() => toggleSection("pattern")}
-        >
+      <hr className="filter-divider" />
+      <div className="filter-item">
+        <div className="filter-header" onClick={() => toggleSection("pattern")}>
           <span>PATTERN</span>
           {expandedSections.pattern ? <FaChevronUp /> : <FaChevronDown />}
         </div>
-        {expandedSections.pattern && <div className="ml-4 mt-2"></div>}
+        {expandedSections.pattern && <div className="filter-options"></div>}
       </div>
       <p>All</p>
-      <hr />
+      <hr className="filter-divider" />
     </div>
   );
 };

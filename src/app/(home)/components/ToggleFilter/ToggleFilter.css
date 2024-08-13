@@ -1,0 +1,93 @@
+/* Toggle Filter Styles */
+.toggle-filter-container {
+  max-width: 70%;
+  height: 88px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  margin: 0 auto;
+}
+
+.toggle-filter-items {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  gap: 0.5rem;
+}
+
+.toggle-filter-total {
+  font-weight: bold;
+}
+
+.toggle-filter-icon {
+  transition: all 0.7s;
+}
+
+.toggle-filter-button {
+  text-decoration: underline;
+  color: #ccc;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.toggle-filter-dropdown {
+  position: relative;
+}
+
+.toggle-filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  gap: 0.5rem;
+}
+
+.toggle-filter-recommended {
+  font-weight: bold;
+}
+
+.toggle-filter-chevron {
+  font-weight: normal;
+}
+
+.toggle-filter-menu {
+  position: absolute;
+  right: 0;
+  margin-top: 0.5rem;
+  width: 240px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.toggle-filter-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.toggle-filter-item {
+  padding: 0.5rem 1rem;
+  color: black;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toggle-filter-item:hover {
+  background-color: #f7f7f7;
+}
+
+/* Hide Toggle Filter on Small Devices */
+@media (max-width: 767px) {
+  .toggle-filter-container {
+    display: none;
+  }
+}
